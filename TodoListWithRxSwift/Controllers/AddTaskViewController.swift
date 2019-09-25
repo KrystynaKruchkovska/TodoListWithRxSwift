@@ -11,6 +11,12 @@ import RxSwift
 
 class AddTaskViewController: UIViewController {
 
+    private let taskSubject = PublishSubject<Task>()
+
+    var taskSubjectObservable: Observable<Task> {
+        return taskSubject.asObservable()
+    }
+
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var textField: UITextField!
     override func viewDidLoad() {
@@ -22,20 +28,13 @@ class AddTaskViewController: UIViewController {
     
     @IBAction func savePressed(_ sender: UIBarButtonItem) {
 
-        guard  let priority = Prionrity(rawValue: segmentedControl.selectedSegmentIndex), let title = textField.text else {
+        guard  let priority = Priority(rawValue: segmentedControl.selectedSegmentIndex), let title = textField.text else {
             return
         }
         let task = Task(title: title, priority: priority)
+        taskSubject.onNext(task)
+        self.dismiss(animated: true, completion: nil)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

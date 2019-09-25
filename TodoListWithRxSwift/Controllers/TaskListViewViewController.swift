@@ -8,8 +8,12 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class TaskListViewViewController: UIViewController {
+
+    private let disposeBag = DisposeBag()
+    let tasks = BehaviorRelay<[Task]>(value:[])
 
     @IBOutlet weak var prioritySegmentedControl: UISegmentedControl!
 
@@ -21,17 +25,27 @@ class TaskListViewViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         // Do any additional setup after loading the view.
     }
-    
 
-    /*
+
     // MARK: - Navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let nc = segue.destination as? UINavigationController,
+         let addTaskVc = nc.viewControllers.first as? AddTaskViewController else {
+             fatalError("line \(#line) faild")
+         }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        addTaskVc.taskSubjectObservable
+            .subscribe(onNext: { [weak self] task in
+
+                guard let weakSelf = self else { return }
+
+                let priority = Priority(rawValue: weakSelf.prioritySegmentedControl.selectedSegmentIndex - 1)
+
+                var existingTasks = weakSelf.tasks.value
+                existingTasks.append(task)
+                weakSelf.tasks.accept(existingTasks)
+            }).disposed(by: disposeBag)
+     }
 
 }
 
