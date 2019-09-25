@@ -14,6 +14,7 @@
 		046371E3233B679400B2326C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046371E1233B679400B2326C /* LaunchScreen.storyboard */; };
 		046371EC233B69B700B2326C /* TaskListViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046371EB233B69B700B2326C /* TaskListViewViewController.swift */; };
 		046371EE233B769300B2326C /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046371ED233B769300B2326C /* AddTaskViewController.swift */; };
+		046371F1233B7D2F00B2326C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046371F0233B7D2F00B2326C /* Task.swift */; };
 		A444C3687FA2E4BAFDA013A6 /* Pods_TodoListWithRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A021FE288E393A204F06513E /* Pods_TodoListWithRxSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		046371E4233B679400B2326C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		046371EB233B69B700B2326C /* TaskListViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewViewController.swift; sourceTree = "<group>"; };
 		046371ED233B769300B2326C /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		046371F0233B7D2F00B2326C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		5E0762262F0376A6BCC9AAE1 /* Pods-TodoListWithRxSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoListWithRxSwift.debug.xcconfig"; path = "Target Support Files/Pods-TodoListWithRxSwift/Pods-TodoListWithRxSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		A021FE288E393A204F06513E /* Pods_TodoListWithRxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoListWithRxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6975C33AC071E48157CF1CE /* Pods-TodoListWithRxSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoListWithRxSwift.release.xcconfig"; path = "Target Support Files/Pods-TodoListWithRxSwift/Pods-TodoListWithRxSwift.release.xcconfig"; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 		046371D5233B678D00B2326C /* TodoListWithRxSwift */ = {
 			isa = PBXGroup;
 			children = (
+				046371EF233B7D1C00B2326C /* Model */,
 				046371EA233B698600B2326C /* Controllers */,
 				046371D6233B678D00B2326C /* AppDelegate.swift */,
 				046371D8233B678D00B2326C /* SceneDelegate.swift */,
@@ -83,6 +86,14 @@
 				046371ED233B769300B2326C /* AddTaskViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		046371EF233B7D1C00B2326C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				046371F0233B7D2F00B2326C /* Task.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		7059B49B754C15A193EC1C46 /* Pods */ = {
@@ -218,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				046371D7233B678D00B2326C /* AppDelegate.swift in Sources */,
+				046371F1233B7D2F00B2326C /* Task.swift in Sources */,
 				046371EE233B769300B2326C /* AddTaskViewController.swift in Sources */,
 				046371EC233B69B700B2326C /* TaskListViewViewController.swift in Sources */,
 				046371D9233B678D00B2326C /* SceneDelegate.swift in Sources */,

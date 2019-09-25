@@ -111,6 +111,9 @@
                     <navigationItem key="navigationItem" title="Add Task" id="Fux-da-aES">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="d0l-q9-Ve6">
                             <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="savePressed:" destination="9U4-uc-Zrx" id="nSd-Pq-XC2"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

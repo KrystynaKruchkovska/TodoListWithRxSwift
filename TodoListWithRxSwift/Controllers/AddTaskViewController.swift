@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class AddTaskViewController: UIViewController {
 
@@ -19,6 +20,13 @@ class AddTaskViewController: UIViewController {
 
     }
     
+    @IBAction func savePressed(_ sender: UIBarButtonItem) {
+
+        guard  let priority = Prionrity(rawValue: segmentedControl.selectedSegmentIndex), let title = textField.text else {
+            return
+        }
+        let task = Task(title: title, priority: priority)
+    }
 
     /*
     // MARK: - Navigation
