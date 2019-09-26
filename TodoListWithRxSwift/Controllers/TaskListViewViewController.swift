@@ -13,7 +13,8 @@ import RxCocoa
 class TaskListViewViewController: UIViewController {
 
     private let disposeBag = DisposeBag()
-    let tasks = BehaviorRelay<[Task]>(value:[])
+    private let tasks = BehaviorRelay<[Task]>(value:[])
+    private var filteredTasks = [Task]()
 
     @IBOutlet weak var prioritySegmentedControl: UISegmentedControl!
 
@@ -44,20 +45,52 @@ class TaskListViewViewController: UIViewController {
                 var existingTasks = weakSelf.tasks.value
                 existingTasks.append(task)
                 weakSelf.tasks.accept(existingTasks)
+
+                weakSelf.filterTasks(by: priority)
             }).disposed(by: disposeBag)
      }
+
+    private func filterTasks(by priority: Priority?) {
+
+        if priority == nil {
+            self.filteredTasks = self.tasks.value
+            updateTableView()
+        } else {
+            self.tasks.map { tasks in
+                return tasks.filter { $0.priority == priority }
+            }.subscribe(onNext: { [weak self] tasks in
+                self?.filteredTasks = tasks
+                self?.updateTableView()
+                }).disposed(by: disposeBag)
+        }
+    }
+
+    private func updateTableView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
+
+    @IBAction func priorityValueChanged(_ sender: UISegmentedControl) {
+
+        let priority = Priority(rawValue: sender.selectedSegmentIndex - 1)
+        filterTasks(by: priority)
+    }
 
 }
 
 extension TaskListViewViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return filteredTasks.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskListViewViewCell", for: indexPath) 
+         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskListViewViewCell", for: indexPath)
+
+        cell.textLabel?.text = filteredTasks[indexPath.row].title
+
         return cell
     }
 
